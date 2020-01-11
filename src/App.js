@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import ScheduleEntry from './components/SchedulerEntry';
+
 function App() {
+  console.log('pizza')
+  console.log(ScheduleEntry())
+
   var CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   var API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -92,7 +97,7 @@ function App() {
   };
 
   const listUpcomingEvents = () => {
-    window.gapi.client.calendar.events
+      window.gapi.client.calendar.events
       .list({
         calendarId: "primary",
         timeMin: new Date().toISOString(),
@@ -129,6 +134,7 @@ function App() {
             <h3>See the console</h3>
           </>
         ) : (
+          
           <button onClick={handleAuthClick}>Authorize Google Calendar</button>
         )}
       </header>

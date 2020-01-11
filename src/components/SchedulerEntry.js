@@ -9,25 +9,30 @@ const dates = ['M', 'Tu', 'W', 'Th', 'F']; // replace this with the dates, try t
 //2. find the schedule based off id from database, compare times
 
 //for each 
-const ScheduleEntryEmpty = ({id}) => {
-    const events = dates.map(createDateEntry);
-    const schedule = `"id": ${id}, "events": ${events} `
-      saveToFirebase(schedule);
+const ScheduleEntry = () => {
+    const times = createTimes();
+    const events = dates.map(function(item){
+        return {item, times};})
+        //return createDateEntry(item, times);})
+    return events;
+    //const schedule = `"id": ${id}, "events": ${events} `
+    //saveToFirebase(schedule);
 
 }
 
-//these should for each date in the period create each possible time combination
-const createDateEntry= ({date}) =>{
-    hours.map(createHourEntry);
-}
+
 
 //this creates every possible hour/minute combindation
-const createTimeEntry= ({hour}) =>{
-    return `${hour}:`
+const createTimes = () => {
+    return hours.map(function (item) {
+        return minutes.map(function (item2) {
+            return `${item}:${item2}:00`;
+        })
+    }).flat()
 }
 
-const saveToFirebase = ({schedule}) =>{
+const saveToFirebase = ({ schedule }) => {
 
 }
 
-export {ScheduleEntry};
+export default ScheduleEntry;
